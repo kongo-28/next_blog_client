@@ -5,6 +5,7 @@ import styles from "@/styles/Home.module.css";
 import { Post } from "@/types";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 type Props = {
   posts: Post[];
@@ -25,9 +26,13 @@ export async function getStaticProps() {
 }
 
 export default function Home({ posts }: Props) {
+  const router = useRouter();
+
   const handleDelete = async (postId: string) => {
     try {
       await axios.delete(`http://localhost:3000/posts/${postId}`);
+
+      router.reload();
     } catch (err) {
       alert("削除に失敗しました");
     }
