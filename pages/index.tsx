@@ -41,14 +41,15 @@ export default function Home({ posts }: Props) {
         <div>
           {posts.map((post: Post) => (
             <div key={post.id} className={styles.postCard}>
-              <Link href={`posts/${post.id}`}className={styles.postCardBox}>
+              <Link href={`posts/${post.id}`} className={styles.postCardBox}>
                 <h2>{post.title}</h2>
               </Link>
               <p>{post.content}</p>
-              <button className={styles.editButton}>Edit</button>
+              <Link href={`/edit-post/${post.id}`}>
+                <button className={styles.editButton}>Edit</button>
+              </Link>
               <button className={styles.deleteButton}>Delete</button>
             </div>
-
           ))}
         </div>
       </div>
