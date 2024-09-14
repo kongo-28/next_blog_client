@@ -2,11 +2,17 @@ import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
+import { Post } from "@/types";
+import Link from "next/link";
+
+type Props = {
+  posts: Post[];
+};
 
 export async function getStaticProps() {
   const res = await fetch("http://localhost:3000/posts");
   const posts = await res.json();
-  
+
   console.log(posts);
 
   return {
@@ -17,7 +23,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home() {
+export default function Home({ posts }: Props) {
   return (
     <>
       <Head>
@@ -26,7 +32,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      aa
+      <div>
+        {posts.map((post: Post) => (
+          <div key={post.id} className={styles.postCard}>
+            <Link href={`posts/${post.id}`}className={styles.postCardBox}>
+              <h2>{post.title}</h2>
+            </Link>
+            <p>{post.content}</p>
+          </div>
+
+        ))}
+      </div>
     </>
   );
 }
