@@ -1,5 +1,8 @@
 import type {Post} from "@/types"  //isolatedModulesのエラー回避のため、型としてのみインポート
+// import { useRouter } from "next/navigation";   //loading中の動作の為に必要
 import React from "react";
+import styles from "@/styles/Post.module.css"
+
 
 
 type Props ={
@@ -38,13 +41,21 @@ export async function getStaticProps({params}: {params: {id: string}} ) {
 }
 
 const Post = ( {post}: Props ) => {
-  const router = useRouter()
+//   const router = useRouter();
 
-  if(router.isFallback) {
-    return <div>Loading...</div>
-  }
+//   if(router.isFallback) {
+//     return <div>Loading...</div>
+//   }
 
-  return <div>詳細ページです</div>;
-;}
+  return (
+    <div className={styles.container}>
+      <div className={styles.title}>{post.title}</div>
+      <div className={styles.date}>{post.created_at}</div>
+      <p className={styles.content}>{post.content}</p>
+    </div>
+  )
+    
+  
+}
 
 export default Post;
