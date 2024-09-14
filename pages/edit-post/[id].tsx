@@ -2,10 +2,28 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "@/styles/Home.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { Post } from "@/types";
 
-const EditPost = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+type Props = {
+  post: Post;
+};
+
+export async function getServerSideProps(context: any) {
+  const id = context.params.id;
+
+  const res = await fetch(`http://localhost:3000/posts/${id}`);
+  const post = await res.json();
+
+  return {
+    props: {
+      post,
+    },
+  };
+}
+
+const EditPost = ({ post }: Props) => {
+  const [title, setTitle] = useState(post.title);
+  const [content, setContent] = useState(post.content);
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -15,7 +33,7 @@ const EditPost = () => {
 
     //APIをたたく
     try {
-      await axios.put("http://localhost:3000/posts", {
+      await axios.put(`http://localhost:3000/posts/${post.id}`, {
         title: title,
         content: content,
       });
@@ -37,6 +55,7 @@ const EditPost = () => {
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setTitle(e.target.value)
           }
+          value={title}
         />
         <label className={styles.label}>本文</label>
 
@@ -45,10 +64,11 @@ const EditPost = () => {
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             setContent(e.target.value)
           }
+          value={content}
         />
 
         <button type="submit" className={styles.button}>
-          投稿
+          編集
         </button>
       </form>
     </div>
