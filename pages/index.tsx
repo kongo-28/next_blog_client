@@ -3,6 +3,19 @@ import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
 
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/posts");
+  const posts = await res.json();
+  
+  console.log(posts);
+
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 60 * 60 * 24,
+  };
+}
 
 export default function Home() {
   return (
@@ -13,6 +26,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      aa
     </>
   );
 }
