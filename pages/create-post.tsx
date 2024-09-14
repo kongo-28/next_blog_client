@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "@/styles/Home.module.css";
 
 const CreatePost = () => {
@@ -9,6 +9,8 @@ const CreatePost = () => {
     e.preventDefault();
 
     console.log(title, content);
+
+    //APIをたたく
   };
 
   return (
