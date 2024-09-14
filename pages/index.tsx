@@ -32,16 +32,21 @@ export default function Home({ posts }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        {posts.map((post: Post) => (
-          <div key={post.id} className={styles.postCard}>
-            <Link href={`posts/${post.id}`}className={styles.postCardBox}>
-              <h2>{post.title}</h2>
-            </Link>
-            <p>{post.content}</p>
-          </div>
 
-        ))}
+      <div className={styles.homeContainer}>
+        <div>
+          {posts.map((post: Post) => (
+            <div key={post.id} className={styles.postCard}>
+              <Link href={`posts/${post.id}`}className={styles.postCardBox}>
+                <h2>{post.title}</h2>
+              </Link>
+              <p>{post.content}</p>
+              <button className={styles.editButton}>Edit</button>
+              <button className={styles.deleteButton}>Delete</button>
+            </div>
+
+          ))}
+        </div>
       </div>
     </>
   );
