@@ -34,6 +34,10 @@ export default function Home({ posts }: Props) {
       </Head>
 
       <div className={styles.homeContainer}>
+        <h2>Next Blog</h2>
+        <Link href="/create-post" className={styles.createButton}>
+          Create new Post
+        </Link>
         <div>
           {posts.map((post: Post) => (
             <div key={post.id} className={styles.postCard}>
