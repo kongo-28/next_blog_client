@@ -38,6 +38,12 @@ export async function getStaticProps({params}: {params: {id: string}} ) {
 }
 
 const Post = ( {post}: Props ) => {
+  const router = useRouter()
+
+  if(router.isFallback) {
+    return <div>Loading...</div>
+  }
+
   return <div>詳細ページです</div>;
 ;}
 
