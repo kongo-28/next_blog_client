@@ -8,6 +8,7 @@ const CreatePost = () => {
   const [content, setContent] = useState("");
   const router = useRouter();
 
+  // ////////handleSubmit////////////////////////////////////
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -25,7 +26,9 @@ const CreatePost = () => {
       alert("投稿に失敗しました");
     }
   };
+  // ////////handleSubmit////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>ブログ新規登録</h1>
