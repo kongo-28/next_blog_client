@@ -28,6 +28,7 @@ export async function getStaticProps() {
 export default function Home({ posts }: Props) {
   const router = useRouter();
 
+  ////////////////  削除機能  //////////////////////
   const handleDelete = async (postId: string) => {
     try {
       await axios.delete(`http://localhost:3000/posts/${postId}`);
@@ -37,6 +38,7 @@ export default function Home({ posts }: Props) {
       alert("削除に失敗しました");
     }
   };
+  ////////////////  削除機能  //////////////////////
 
   return (
     <>
